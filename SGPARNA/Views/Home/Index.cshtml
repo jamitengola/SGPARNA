@@ -1,0 +1,53 @@
+﻿@using SGPARNA.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Search Section -->
+<section class="search-section home-search">
+    <div class="masthead text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-md-auto">
+                    <h1>Pesquise aqui o seu Documento</h1>
+                    <p class="lead text-muted">
+                        Sed eget orci eleifend enim mattis suscipit. Suspendisse potenti non
+                        ipsum.
+                    </p>
+                    <form action="/Home/Pesquisa" method="post">
+                        <input  id="palavra" name="palavra" type="text" class="search-field" placeholder="Insira os seus dados ex:nº B.I ... ">
+                        <button type="submit">
+                            <i class="icon icon-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Topics -->
+<section class="topics">
+    <div class="container">
+        <div class="row">
+            @foreach (var i in db.Categorias)
+            {
+            <div class="col-xl-4 col-md-6">
+                <div class="topics-wrapper border-style">
+                    <h3><a href="/Categorias/Details/@i.Id"><span class="icon icon-circle-o text-blue"></span>@i.Nome</a></h3>
+                    <ul class="topics-list">
+                        <li>
+                            <i>@i.Descricao</i>
+                        </li>
+                      
+                    </ul>
+                    <ul class="topics-meta">
+                        <li>15 Topics</li>
+                        <li>Level - Medium</li>
+                    </ul>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</section>

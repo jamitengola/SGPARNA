@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - SGPARNA</title>
+    <link rel="stylesheet" href="~/assets/css/app.css">
+    <style>
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F8FA;
+            z-index: 9998;
+            text-align: center;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+
+</head>
+<body>
+    <!-- Pre loader -->
+    <div id="loader" class="loader">
+        <div class="plane-container">
+            <div class="l-s-2 blink">Carregando</div>
+        </div>
+    </div>
+
+    <div id="app" class="paper-loading">
+        <!-- Header -->
+        <nav class="mainnav navbar navbar-default justify-content-between">
+            <div class="container relative">
+                <a class="offcanvas dl-trigger paper-nav-toggle" data-toggle="offcanvas"
+                   aria-expanded="false" aria-label="Toggle navigation">
+                    <i></i>
+                </a>
+                <a class="navbar-brand" href="/">
+                    <img class="d-inline-block align-top" alt=""  height="80" src="~/assets/img/logo.png">
+                </a>
+                <div class="paper_menu">
+                    <div id="dl-menu" class="xv-menuwrapper responsive-menu">
+                        <ul class="dl-menu align-items-center">
+                            <li><a href="#">Inicio</a></li>
+                            <li class="parent">
+                                <a href="#">Documentos</a>
+                                <ul class="lg-submenu">
+                                    <li><a href="#">Anunciar</a>
+                                    <li><a href="#">Perdidos</a>
+                                    <li><a href="#">Achados</a>
+
+                                </ul>
+                            </li>
+                            @using Microsoft.AspNet.Identity
+                            @using SGPARNA.Models
+                            @if (Request.IsAuthenticated)
+                            {
+                                ApplicationDbContext db = new ApplicationDbContext();
+                                var user = db.Users.Find(User.Identity.GetUserId());
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                }
+                                <li>
+                                    <a href="/Painel/">
+                                        Painel Administrativo
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>Olá,@user.PrimeiroNome </a>
+
+                                    @*     @Html.ActionLink("Olá " + user.PrimeiroNome + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                                </li>
+
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Sair</a></li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="/Account/Login">
+                                        Entrar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Account/Register" class="btn btn-default nav-btn">
+                                        Registar
+                                    </a>
+                                </li>
+
+                            }
+
+
+                        </ul>
+                    </div>
+                    <!-- Login modal -->
+                </div>
+            </div>
+        </nav>
+        <main style="min-height">
+            @RenderBody()
+        </main>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class=" col-lg-2 col-xl-3 col-12 responsive-phone">
+                        <a href="#" class="brand">
+                            <img src="~/assets/img/logo.png" alt="Knowledge">
+                            <span class="circle"></span>
+                        </a>
+                    </div>
+                    <div class="col-6  col-md-4 col-lg-2">
+                        <h6>Atalhos</h6>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="#">Texto 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6  col-md-4 col-lg-2">
+                        <h6>Outros Links</h6>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="#">Texto 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6  col-md-4 col-lg-2">
+                        <h6>Sobre Nós</h6>
+                        <ul class="footer-links">
+                            <li>
+                                <a href="#">Texto 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 3</a>
+                            </li>
+                            <li>
+                                <a href="#">Texto 4</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-md-12 col-12 col-xl-3 responsive-phone">
+                        <h6>Nossas Redes</h6>
+                        <ul class="social">
+                            <li class="facebook">
+                                <a href="#"><i class="icon icon-facebook"></i></a>
+                            </li>
+                            <li class="twitter">
+                                <a href="#"><i class="icon icon-twitter"></i></a>
+                            </li>
+                            <li class="gplus">
+                                <a href="#"><i class="icon icon-google-plus"></i></a>
+                            </li>
+                        </ul>
+                        <div class="copyrights">
+                            <p>&#xA9; 2018 nenhum direito, reservado por enquanto</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Login modal -->
+        <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin">
+            <div class="modal-dialog width-400" role="document">
+                <div class="modal-content no-r ">
+                    <a href="#" data-dismiss="modal" aria-label="Close"
+                       class="paper-nav-toggle active"><i></i></a>
+                    <div class="modal-body no-p">
+                        <div class="text-center p-40 p-b-0">
+                            <img src="assets/img/dummy/u4.png" alt="">
+                            <h3>Welcome Back</h3>
+                            <p class="p-t-b-20">
+                                Hey Soldier welcome back signin now there is lot of new stuff waiting
+                                for you
+                            </p>
+                        </div>
+                        <div class="light p-40 b-t-b">
+                            <form action="">
+                                <div class="form-group has-icon">
+                                    <i class="icon-envelope-o"></i>
+                                    <input type="text" class="form-control form-control-lg"
+                                           placeholder="Email Address">
+                                </div>
+                                <div class="form-group has-icon">
+                                    <i class="icon-user-secret"></i>
+                                    <input type="text" class="form-control form-control-lg"
+                                           placeholder="Password">
+                                </div>
+                                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Log In">
+                                <small class="forget-pass">Have you forgot your username or password ?</small>
+                            </form>
+                        </div>
+                        <div class="p-40">
+                            <a href="#" class="btn btn-lg btn-block btn-social facebook">
+                                <i class="icon-facebook"></i> Login with Facebook
+                            </a>
+                            <a href="#" class="btn btn-lg btn-block btn-social twitter">
+
+                                <i class="icon-twitter"></i> Login with Twitter
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--End Page page_wrrapper -->
+    <script src="~/assets/js/app.js"></script>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<SGPARNA.Models.Tipo_Documento>
+@{
+    ViewBag.Title = "Pesquisa";
+}
+
+<div class="search-section">
+    <div class="masthead single-masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-md-auto">
+                    <h1 class="center">Pesquise Aqui</h1>
+                    <form action="/Home/Pesquisa" method="post">
+                        <input type="text" id="palavra" name="palavra" class="search-field" placeholder="Insira os seus dados ex:nº B.I ... ">
+                        <button type="submit">
+                            <i class="icon icon-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol>
+        </ol>
+    </div>
+</div>
+<!-- Main Content -->
+<main class="content-wrapper">
+    <div class="container">
+        <header class="section-heading p-b-40">
+            <p class="text-left">Documentos disponíveis.</p>
+        </header>
+        <div class="row">
+            @foreach (var i in Model)
+            {
+                <div class="col-lg-3">
+                    <article class="post">
+                        <img src="@i.Imagem" />
+                        <span class="ico icon-document-text"></span>
+                        <h2><a href="#">@i.Nome</a></h2>
+                        <a href="single.html">@i.Numero</a>
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</main>

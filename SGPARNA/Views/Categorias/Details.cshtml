@@ -1,0 +1,51 @@
+﻿@model SGPARNA.Models.Categoria
+@using SGPARNA.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    ViewBag.Title = Model.Nome;
+}
+<div class="search-section">
+    <div class="masthead single-masthead">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-md-auto">
+                    <h1 class="center">@Model.Nome</h1>
+                    <form>
+                        <input type="text" class="search-field" placeholder="Insira os seus dados ex:nº B.I ... ">
+                        <button type="submit">
+                            <i class="icon icon-search"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+    <div class="container">
+        <ol>
+           </ol>
+    </div>
+</div>
+<!-- Main Content -->
+<main class="content-wrapper">
+    <div class="container">
+        <header class="section-heading p-b-40">
+            <p class="text-left">Documentos disponíveis.</p>
+        </header>
+        <div class="row">
+            @foreach (var i in db.tipo_Doocumentos.Where(x => x.Documento.Categoria.Id == Model.Id))
+            {
+            <div class="col-lg-3">
+                <article class="post">
+                    <img src="@i.Nome"/>
+                    <span class="ico icon-document-text"></span>
+                    <h2><a href="#">@i.Nome</a></h2>
+                    <a href="single.html">@i.Numero</a>
+                </article>
+            </div>
+            }
+        </div>
+    </div>
+</main>

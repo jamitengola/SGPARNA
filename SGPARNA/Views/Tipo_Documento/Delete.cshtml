@@ -1,0 +1,51 @@
+﻿@model SGPARNA.Models.Tipo_Documento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+    <div class="container">
+        <h2>Delete</h2>
+
+        <h3>Tem a certeza que deseja eliminar esse item ?</h3>
+        <div>
+            <h4>Tipo_Documento</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Numero)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Numero)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Imagem)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Imagem)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+    </div>
